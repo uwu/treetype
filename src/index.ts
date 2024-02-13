@@ -1,7 +1,7 @@
 import ts from "typescript";
 import * as path from "node:path";
 import * as fs from "node:fs/promises";
-import { parseDefinition } from "./def.js";
+import { parseDefinition, type DefinitionEntry } from "./def.js";
 
 const factory = ts.factory;
 
@@ -15,6 +15,25 @@ function getProjectProgram(filePath: string) {
 		rootNames: fileNames,
 		configFileParsingDiagnostics: errors,
 	});
+}
+
+function createImportNode(identifier: ts.Identifier, def: DefinitionEntry) {
+	let importNode: ts.TypeNode = factory.createImportTypeNode(
+		factory.createLiteralTypeNode(factory.createStringLiteral(def.import)),
+		undefined,
+		factory.createIdentifier(def.type),
+		undefined,
+		false,
+	);
+
+	for (const segment of def.resolve) {
+		importNode = factory.createIndexedAccessTypeNode(
+			importNode,
+			factory.createLiteralTypeNode(factory.createStringLiteral(segment)),
+		);
+	}
+
+	return factory.createTypeAliasDeclaration(undefined, identifier, undefined, importNode);
 }
 
 async function main(argv: string[]) {
@@ -36,26 +55,7 @@ async function main(argv: string[]) {
 
 		const statements: ts.Statement[] = [];
 
-		{
-			let importNode: ts.TypeNode = factory.createImportTypeNode(
-				factory.createLiteralTypeNode(factory.createStringLiteral(def.import)),
-				undefined,
-				factory.createIdentifier(def.type),
-				undefined,
-				false,
-			);
-
-			for (const segment of def.resolve) {
-				importNode = factory.createIndexedAccessTypeNode(
-					importNode,
-					factory.createLiteralTypeNode(factory.createStringLiteral(segment)),
-				);
-			}
-
-			statements.push(
-				factory.createTypeAliasDeclaration(undefined, rootIdent, undefined, importNode)
-			);
-		}
+		statements.push(createImportNode(rootIdent, def));
 
 		{
 			const source = program.getSourceFile(path.resolve(path.dirname(file), def.source));

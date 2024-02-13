@@ -82,6 +82,14 @@ function* tokenize(input: string) {
 	}
 }
 
+export type DefinitionEntry = {
+	path: string[];
+	resolve: string[];
+	type: string;
+	source: string;
+	import: string;
+};
+
 export function* parseDefinition(source: string) {
 	const tokens = [...tokenize(source)];
 	let pos = 0;
@@ -105,13 +113,7 @@ export function* parseDefinition(source: string) {
 		path: string[] = [],
 		resolve: string[] = [],
 		from: string | null = null
-	): Generator<{
-		path: string[],
-		resolve: string[],
-		type: string,
-		source: string,
-		import: string,
-	}> {
+	): Generator<DefinitionEntry> {
 		ensureNotEof();
 		const name = read();
 
