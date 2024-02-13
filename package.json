@@ -9,8 +9,8 @@
 	},
 	"author": "redstonekasi",
 	"license": "BSD-3-Clause",
-	"dependencies": {
-		"typescript": "^5.3.3"
+	"peerDependencies": {
+		"typescript": "^5.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "^20.11.17"
