@@ -5,9 +5,9 @@ TreeType generates module definitions for object types.
 ## Install
 
 ```sh
-npm i treetype -D
-yarn add treetype --dev
-pnpm add treetype -D
+npm    i -D @uwu/treetype
+yarn add -D @uwu/treetype
+pnpm add -D @uwu/treetype
 ```
 
 ## Usage
@@ -54,10 +54,10 @@ modules usable
 
 ```ts
 export default {
-  output: {
-    globals(id) {
-      if (id.startsWith("@module")) return id.substring(1).replace(/\//g, ".");
-    },
-  },
+	output: {
+		globals(id) {
+			if (id.startsWith("@module")) return id.substring(1).replace(/\//g, ".");
+		},
+	},
 };
 ```
