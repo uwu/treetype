@@ -2,9 +2,13 @@
 	"name": "treetype",
 	"version": "1.0.0",
 	"description": "Convert types into module declarations",
+	"type": "module",
 	"main": "dist/index.js",
 	"bin": "dist/cli.js",
-	"type": "module",
+	"exports": {
+		"import": "./dist/index.js",
+		"require": "./dist/index.cjs"
+	},
 	"files": ["dist"],
 	"scripts": {
 		"prepack": "tsup"

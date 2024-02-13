@@ -45,9 +45,7 @@ async function main(argv: string[]) {
 	}
 }
 
-try {
-	await main(process.argv.slice(2));
-} catch (e) {
+main(process.argv.slice(2)).catch((e) => {
 	console.error(`error: ${e instanceof Error ? e.message : e}`);
 	process.exit(1);
-}
+});
