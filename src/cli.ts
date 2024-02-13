@@ -19,8 +19,13 @@ function getProjectProgram(filePath: string) {
 
 async function main(argv: string[]) {
 	if (argv.length < 1) {
-		console.error("usage: treetype <definition file>");
+		console.error("usage: treetype <definition file> [output file]");
 		process.exit(1);
+	}
+
+	let output: fs.FileHandle | undefined;
+	if (argv.length > 1) {
+		output = await fs.open(argv[1], "w");
 	}
 
 	const file = path.resolve(argv[0]);
@@ -39,9 +44,18 @@ async function main(argv: string[]) {
 	const printer = ts.createPrinter({
 		newLine: ts.NewLineKind.LineFeed,
 	});
+
 	for (const node of nodes) {
 		const str = printer.printNode(ts.EmitHint.Unspecified, node, result);
-		console.log(str);
+		if (output) {
+			output.write(str + "\n");
+		} else {
+			console.log(str);
+		}
+	}
+
+	if (output) {
+		output.close();
 	}
 }
 

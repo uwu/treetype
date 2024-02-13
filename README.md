@@ -13,8 +13,10 @@ pnpm add -D @uwu/treetype
 ## Usage
 
 ```
-treetype <definition file>
+treetype <definition file> [output file]
 ```
+
+If the output file is not specified, standard output is used.
 
 The definition file specifies which modules to generate, the format is as follows:
 
