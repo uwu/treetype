@@ -36,6 +36,8 @@ function createImportNode(identifier: ts.Identifier, def: DefinitionEntry) {
 	return factory.createTypeAliasDeclaration(undefined, identifier, undefined, importNode);
 }
 
+const reserved = ["break","case","catch","class","const","continue","debugger","default","delete","do","else","enum","export","extends","false","finally","for","function","if","import","in","instanceof","new","null","return","super","switch","this","throw","true","try","typeof","var","void","while","with"];
+
 async function main(argv: string[]) {
 	if (argv.length < 1) {
 		console.error("usage: treetype <definition file>");
@@ -75,8 +77,7 @@ async function main(argv: string[]) {
 			const ref: ts.TypeNode = factory.createTypeReferenceNode(rootIdent);
 			const declarations: ts.VariableDeclaration[] = [];
 			for (const prop of checker.getPropertiesOfType(type)) {
-				// @ts-expect-error
-				if (prop.name in ts.textToKeywordObj) continue;
+				if (reserved.includes(prop.name)) continue;
 
 				declarations.push(
 					factory.createVariableDeclaration(
