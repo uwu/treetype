@@ -3,9 +3,11 @@
 	"version": "1.0.0",
 	"description": "Convert types into module declarations",
 	"main": "dist/index.js",
+	"bin": "dist/cli.js",
 	"type": "module",
+	"files": ["dist"],
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"prepack": "tsup"
 	},
 	"author": "redstonekasi",
 	"license": "BSD-3-Clause",
@@ -13,6 +15,7 @@
 		"typescript": "^5.0.0"
 	},
 	"devDependencies": {
-		"@types/node": "^20.11.17"
+		"@types/node": "^20.11.17",
+		"tsup": "^8.0.2"
 	}
 }

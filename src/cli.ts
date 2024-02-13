@@ -1,3 +1,4 @@
+#!/bin/env node
 import ts from "typescript";
 import * as path from "node:path";
 import * as fs from "node:fs/promises";
@@ -19,6 +20,7 @@ function getProjectProgram(filePath: string) {
 async function main(argv: string[]) {
 	if (argv.length < 1) {
 		console.error("usage: treetype <definition file>");
+		process.exit(1);
 	}
 
 	const file = path.resolve(argv[0]);
