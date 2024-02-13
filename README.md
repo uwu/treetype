@@ -5,11 +5,9 @@ TreeType generates module definitions for object types.
 ## Install
 
 ```sh
-npm i tsup -D
-# Or Yarn
-yarn add tsup --dev
-# Or pnpm
-pnpm add tsup -D
+npm i treetype -D
+yarn add treetype --dev
+pnpm add treetype -D
 ```
 
 ## Usage
@@ -29,7 +27,7 @@ The definition file specifies which modules to generate, the format is as follow
 
 # All top-level modules must have a source type, this source type must be exported
 # All properties on the source type are declared exports on the generated module
-module from SourceType {
+@module from SourceType {
   # You may further specify a property inside a module to generate nested modules
   test
   hello {
@@ -49,5 +47,17 @@ Should any path or tree node need to contain whitespace, you can enclose it in q
 
 ### Bundler usage
 
-Bundler plugins will be provided in the future, until then, here are examples of how to use a bundler to make TreeType
+A bundler plugin will be provided in the future, until then, here are examples of how to use a bundler to make TreeType
 modules usable
+
+#### Rollup
+
+```ts
+export default {
+  output: {
+    globals(id) {
+      if (id.startsWith("@module")) return id.substring(1).replace(/\//g, ".");
+    },
+  },
+};
+```
