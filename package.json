@@ -1,5 +1,5 @@
 {
-	"name": "treetype",
+	"name": "@uwu/treetype",
 	"version": "1.0.0",
 	"description": "Convert types into module declarations",
 	"type": "module",
@@ -15,6 +15,8 @@
 	"scripts": {
 		"prepack": "tsup"
 	},
+	"homepage": "https://github.com/uwu/treetype#readme",
+	"repository": "github:uwu/treetype",
 	"author": "redstonekasi",
 	"license": "BSD-3-Clause",
 	"peerDependencies": {
