@@ -1,9 +1,9 @@
 #!/bin/env node
-import ts from "typescript";
-import * as path from "node:path";
 import * as fs from "node:fs/promises";
-import { parseDefinition } from "./def.js";
+import * as path from "node:path";
+import ts from "typescript";
 import { createModuleDeclarations } from "./core.js";
+import { parseDefinition } from "./def.js";
 
 function getProjectProgram(filePath: string) {
 	const configPath = ts.findConfigFile(filePath, ts.sys.fileExists, "tsconfig.json");
@@ -34,7 +34,7 @@ async function main(argv: string[]) {
 	const program = getProjectProgram(file);
 	const definitions = parseDefinition(raw);
 
-	const nodes = createModuleDeclarations(program, definitions, path.dirname(file))
+	const nodes = createModuleDeclarations(program, definitions, path.dirname(file));
 	const result = ts.createSourceFile("output.ts", "", ts.ScriptTarget.ESNext, false, ts.ScriptKind.TS);
 	const printer = ts.createPrinter({
 		newLine: ts.NewLineKind.LineFeed,

@@ -3,6 +3,7 @@
 TreeType generates module definitions for object types.
 
 ## Install
+
 ```sh
 npm i tsup -D
 # Or Yarn
@@ -12,11 +13,13 @@ pnpm add tsup -D
 ```
 
 ## Usage
+
 ```
 treetype <definition file>
 ```
 
 The definition file specifies which modules to generate, the format is as follows:
+
 ```ini
 ## These directives control some global options
 # `source` specifies which file should be used as the source of all source types
@@ -41,6 +44,7 @@ module from SourceType {
   }
 }
 ```
+
 Should any path or tree node need to contain whitespace, you can enclose it in quotes (`"`).
 
 <!-- TODO: example plugins -->

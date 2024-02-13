@@ -24,7 +24,7 @@ function createImportNode(def: DefinitionEntry) {
 	return factory.createTypeAliasDeclaration(undefined, rootIdent, undefined, importNode);
 }
 
-const reserved = [
+const reserved = /* dprint-ignore */ [
 	"break", "case", "catch", "class", "const", "continue", "debugger",
 	"default", "delete", "do", "else", "enum", "export", "extends", "false",
 	"finally", "for", "function", "if", "import", "in", "instanceof", "new",
@@ -54,7 +54,11 @@ function createExportNode(checker: ts.TypeChecker, type: ts.Type) {
 	);
 }
 
-export function createModuleDeclarations(program: ts.Program, definitions: Iterable<DefinitionEntry>, resolveDir: string) {
+export function createModuleDeclarations(
+	program: ts.Program,
+	definitions: Iterable<DefinitionEntry>,
+	resolveDir: string,
+) {
 	const checker = program.getTypeChecker();
 	const nodes: ts.Node[] = [];
 

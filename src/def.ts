@@ -21,7 +21,7 @@ function* tokenize(input: string) {
 					case "\r":
 					case "\n":
 						break;
-					case '"':
+					case "\"":
 						state = TokenizerState.quote;
 						break;
 					case "#":
@@ -45,7 +45,7 @@ function* tokenize(input: string) {
 							value = "";
 						}
 						break;
-					case '"':
+					case "\"":
 						state = TokenizerState.quote;
 						break;
 					default:
@@ -59,7 +59,7 @@ function* tokenize(input: string) {
 				break;
 			case TokenizerState.quote:
 				switch (char) {
-					case '"':
+					case "\"":
 						state = TokenizerState.word;
 						break;
 					case "\\":
@@ -112,7 +112,7 @@ export function* parseDefinition(source: string) {
 	function* parseNode(
 		path: string[] = [],
 		resolve: string[] = [],
-		from: string | null = null
+		from: string | null = null,
 	): Generator<DefinitionEntry> {
 		ensureNotEof();
 		const name = read();
