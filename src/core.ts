@@ -64,17 +64,18 @@ export function createModuleDeclarations(program: ts.Program, definitions: Itera
 		const statements: ts.Statement[] = [];
 		statements.push(createImportNode(def));
 		{
-			const source = program.getSourceFile(path.resolve(resolveDir, def.source));
-			if (!source) throw new Error("source file not found in project");
+			const sourcePath = path.resolve(resolveDir, def.source);
+			const source = program.getSourceFile(sourcePath);
+			if (!source) throw new Error(`source file "${sourcePath}" not found in project`);
 			const symbol = checker.getSymbolAtLocation(source);
 			if (!symbol) throw new Error("source file has no symbol associated with it");
 			const exp = checker.getExportsOfModule(symbol).find((v) => v.escapedName === def.type);
-			if (!exp) throw new Error("could not find exported type");
+			if (!exp) throw new Error(`could not find exported type "${def.type}" at module "${def.path.join("/")}"`);
 
 			let type = checker.getDeclaredTypeOfSymbol(exp);
 			for (const segment of def.resolve) {
 				const sym = checker.getPropertyOfType(type, segment);
-				if (!sym) throw new Error(`unknown property during traversal "${segment}"`);
+				if (!sym) throw new Error(`unknown property during traversal "${segment}" at module "${def.path.join("/")}"`);
 				type = checker.getTypeOfSymbol(sym);
 			}
 

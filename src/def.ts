@@ -105,7 +105,7 @@ export function* parseDefinition(source: string) {
 	const match = (token: string) => peek() === token;
 	function expect(expected: string) {
 		const got = read();
-		if (got !== expected) throw new Error(`expected "${expected}, got "${got}"`);
+		if (got !== expected) throw new Error(`expected "${expected}", got "${got}"`);
 		return got;
 	}
 
@@ -126,7 +126,7 @@ export function* parseDefinition(source: string) {
 			resolve.shift();
 		}
 
-		if (!from) throw new Error(`expected source type definition on root node`);
+		if (!from) throw new Error(`expected source type definition on root node "${name}"`);
 		if (!currentSource) throw new Error(`expected source file to be set before root node`);
 		if (!currentImport) throw new Error(`expected source import to be set before root node`);
 
