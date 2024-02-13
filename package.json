@@ -1,6 +1,6 @@
 {
 	"name": "@uwu/treetype",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Convert types into module declarations",
 	"type": "module",
 	"main": "dist/index.js",
