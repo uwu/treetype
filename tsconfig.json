@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"module": "Node16",
+		"target": "ES2022",
+    "lib": ["ES2022"],
+
+		"strict": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"verbatimModuleSyntax": true,
+
+		"outDir": "dist"
+	},
+	"include": ["src"]
+}
