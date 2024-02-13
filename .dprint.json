@@ -5,6 +5,7 @@
 		"textWrap": "always"
 	},
 	"excludes": [
+		"**/dist",
 		"**/node_modules",
 		"**/*-lock.json"
 	],

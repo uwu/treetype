@@ -47,4 +47,7 @@ module from SourceType {
 
 Should any path or tree node need to contain whitespace, you can enclose it in quotes (`"`).
 
-<!-- TODO: example plugins -->
+### Bundler usage
+
+Bundler plugins will be provided in the future, until then, here are examples of how to use a bundler to make TreeType
+modules usable
