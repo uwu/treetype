@@ -1,0 +1,7 @@
+\source ./index.ts
+\import ./index
+
+@api from ExampleApi {
+	patcher
+	obj
+}

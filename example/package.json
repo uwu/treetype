@@ -1,0 +1,14 @@
+{
+	"name": "treetype-example",
+	"private": true,
+	"scripts": {
+		"build": "tsc && treetype def.tt dist/treetype.d.ts"
+	},
+	"devDependencies": {
+		"@uwu/treetype": "latest",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"spitroast": "^1.4.3"
+	}
+}
