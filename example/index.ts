@@ -19,4 +19,14 @@ const api = {
 	unload: () => spitroast.unpatchAll(),
 };
 
+const nested = {
+	hello: "world",
+	log: {
+		log: console.log,
+		error: console.error,
+		warn: console.warn,
+	},
+};
+
 export type ExampleApi = typeof api;
+export type NestedApi = typeof nested;

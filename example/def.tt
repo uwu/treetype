@@ -4,4 +4,7 @@
 @api from ExampleApi {
 	patcher
 	obj
+	nested from NestedApi {
+		log
+	}
 }
